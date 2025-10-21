@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Contact Form</title>
+    <link rel="stylesheet" href="exercise-2.css" />
+  </head>
+  <body>
+    <main>
+      <form>
+        <label for="title">Title: </label>
+        <select id="title" name="title">
+          <option value="">Select Title</option>
+          <option value="Mr">Mr</option>
+          <option value="Ms">Ms</option>
+          <option value="Mrs">Mrs</option>
+          <option value="Miss">Miss</option>
+          <option value="Dr">Dr</option>
+          <option value="Sir">Sir</option>
+        </select>
+        <label for="fname">First name:</label>
+        <input
+          id="fname"
+          type="text"
+          name="fname"
+          placeholder="First Name"
+          required
+        />
+        <label for="lname">Last name:</label>
+        <input
+          id="lname"
+          type="text"
+          name="lname"
+          placeholder="Last Name"
+          required
+        />
+        <label for="email">Email Address</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="email-address"
+          required
+        />
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="10"
+          cols="40"
+          placeholder="Any other information"
+        ></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </main>
+  </body>
+</html>
