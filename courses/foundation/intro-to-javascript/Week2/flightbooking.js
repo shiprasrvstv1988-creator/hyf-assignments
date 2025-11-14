@@ -1,4 +1,6 @@
 function getFullName(firstName, surname, useFormalName, gender) {
+  if (!firstName.trim() || !surname.trim())
+    return "Please provide your name and surname";
   let fullName = firstName + " " + surname;
   if (useFormalName) {
     if (gender === "male") {
