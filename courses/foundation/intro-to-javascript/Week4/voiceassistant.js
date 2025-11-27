@@ -1,75 +1,104 @@
-let userName = "";
-let toDoList = [];
+let user = {
+  userName: "",
+  toDoList: [],
+};
 
+//Takes the command and replies
 function getReply(command) {
-  //takes the command and replies
-  if (command.includes("Hello my name is")) {
+  command = command.toLowerCase();
+  // adding guard clause
+  if (!command || typeof command !== "string") {
+    return "Invalid command";
+  }
+
+  if (command.includes("hello my name is")) {
     return extractName(command);
-  } else if (command == "What is my name?") {
+  }
+
+  if (command == "what is my name?") {
     return getUserName();
-  } else if (command.startsWith("Add ") && command.endsWith(" to my todo")) {
+  }
+
+  if (command.startsWith("add") && command.endsWith(" to my todo")) {
     return addToDo(command);
-  } else if (
-    command.startsWith("Remove ") &&
-    command.endsWith(" from my todo")
-  ) {
+  }
+
+  if (command.startsWith("remove") && command.endsWith(" from my todo")) {
     return removeToDo(command);
-  } else if (command == "What is on my todo") {
+  }
+
+  if (command == "what is on my todo") {
     return printToDoList();
-  } else if (command == "What day is it today?") {
+  }
+
+  if (command == "what day is it today?") {
     return getToday();
-  } else if (command.includes("What is")) {
+  }
+
+  if (command.includes("what is")) {
     return simpleMath(command);
-  } else if (command.startsWith("Set a timer for ")) {
+  }
+
+  if (command.startsWith("set a timer for ")) {
     return setTimer(command);
-  } else if (command === "Tell me your name") {
+  }
+
+  if (command === "tell me your name") {
     return yourName(command);
   }
+
+  return "Sorry, I don't understand that command.";
 }
 
+// NAME FUNCTIONS
 function extractName(str) {
+  // str.match() string function that applies regex
+  // regex /my name is ([a-z]+ /i) - so it matches exact text for "my name is" ,
+  // then matches letters from (a-z) or spaces , + takes one or more characters, () captures and separate the username,
+  // /i makes it case-insensitive.
   const match = str.match(/my name is ([a-z ]+)/i);
-  userName = match ? match[1].trim() : null;
-  return "Nice to meet you " + userName;
+  user.userName = match ? match[1].trim() : null;
+  if (user.userName) {
+    return "Nice to meet you " + user.userName;
+  } else {
+    return "Please enter a valid name.";
+  }
 }
 
 function getUserName() {
-  if (userName == "") {
+  //const userName = "";
+  if (user.userName === "") {
     return "You haven't given your name, please use the first command";
   } else {
-    return `Your name is ${userName}`;
+    return `Your name is ${user.userName}`;
   }
 }
 
+// TO DO FUNCTIONS
 function addToDo(command) {
-  if (command.startsWith("Add ") && command.endsWith(" to my todo")) {
-    const activity = command.replace("Add ", "").replace(" to my todo", "");
-    toDoList.push(activity);
-    return `${activity} added to your todo`;
-  }
+  const activity = command.replace("add ", "").replace(" to my todo", "");
+  user.toDoList.push(activity);
+  return `${activity} added to your todo`;
 }
 
 function removeToDo(command) {
-  if (command.startsWith("Remove ") && command.endsWith(" from my todo")) {
-    const activity = command
-      .replace("Remove ", "")
-      .replace(" from my todo", "");
+  const activity = command.replace("remove ", "").replace(" from my todo", "");
 
-    const newList = toDoList.filter((item) => item !== activity);
+  const newList = user.toDoList.filter((item) => item !== activity);
 
-    if (newList.length === toDoList.length) {
-      return `${activity} is not in your todo list`;
-    } else {
-      toDoList = newList;
-      return `${activity} removed from your todo`;
-    }
+  if (newList.length === user.toDoList.length) {
+    return `${activity} is not in your todo list`;
+  } else {
+    user.toDoList = newList;
+    return `${activity} removed from your todo`;
   }
 }
 
 function printToDoList(command) {
-  return `You have ${toDoList.length} todos - ${toDoList}`;
+  return `You have ${user.toDoList.length} todos - ${user.toDoList}`;
 }
 
+// DATE FUNCTION
 function getToday() {
   const today = new Date();
   const date = today.getDate();
@@ -94,8 +123,9 @@ function getToday() {
   return `${date}. of ${month} ${year}`;
 }
 
+//SIMPLE MATH FUNCTIONS
 function simpleMath(command) {
-  const numberString = command.replace("What is ", "");
+  const numberString = command.replace("what is ", "");
   const num = numberString.split(" ");
   const a = parseInt(num[0]);
   const b = parseInt(num[2]);
@@ -115,14 +145,16 @@ function simpleMath(command) {
   return result;
 }
 
+// TIMER FUNCTION
 function setTimer(command) {
   let minutes = parseInt(
-    command.replace("Set a timer for ", "").replace(" minutes", "")
+    command.replace("set a timer for ", "").replace(" minutes", "")
   );
   setTimeout(() => console.log("Timer done"), minutes * 60 * 1000);
   return `Timer is set for ${minutes} minute${minutes !== 1 ? "s" : ""}`;
 }
 
+//BOT NAME
 function yourName() {
   return "I am your voice assistant";
 }
@@ -141,4 +173,5 @@ console.log(getReply("What is 3 + 3"));
 console.log(getReply("What is 50 / 10"));
 console.log(getReply("What is 27 - 10"));
 console.log(getReply("Tell me your name"));
+console.log(getReply("Hello my name is "));
 console.log(getReply("Set a timer for 1 minutes"));
