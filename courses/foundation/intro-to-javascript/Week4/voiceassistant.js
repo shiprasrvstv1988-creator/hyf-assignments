@@ -1,4 +1,4 @@
-let user = {
+const user = {
   userName: "",
   toDoList: [],
 };
@@ -147,7 +147,7 @@ function simpleMath(command) {
 
 // TIMER FUNCTION
 function setTimer(command) {
-  let minutes = parseInt(
+  const minutes = parseInt(
     command.replace("set a timer for ", "").replace(" minutes", "")
   );
   setTimeout(() => console.log("Timer done"), minutes * 60 * 1000);

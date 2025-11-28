@@ -21,7 +21,7 @@ function fib(n) {
 
 //Fizz buzz exercise
 function fizzBuzz(a, b, length) {
-  let result = [];
+  const result = [];
   if (a != 0 && b != 0) {
     for (let i = 1; i <= length; i++) {
       if (i % a === 0 && i % b === 0) {
@@ -59,7 +59,7 @@ function getSentimentScore(string) {
   }
 
   let clean = "";
-  let words = [];
+  const words = [];
 
   for (let char of string) {
     // Keep only letters (A–Z, a–z)
