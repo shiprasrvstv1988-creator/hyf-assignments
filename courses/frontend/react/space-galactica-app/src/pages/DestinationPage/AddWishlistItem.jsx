@@ -5,12 +5,12 @@ export const AddWishlistItem = ({
   onAddWishlistItem,
 }) => {
   const [thumbnail, setThumbnail] = useState('/destination/image-europa.png');
-  // Task - Week 3
+  // 🧑🏽‍🚀 Task - Week 3
   // Add a useState for the handling of the <input id="customWishlist" type="text" />.
   // Connect the setThumbnail to the <select>.
 
   const onAddItemPressed = () => {
-    // Task - Week 3
+    // 🧑🏽‍🚀 Task - Week 3
     // Implement this function.
     // Call the onAddWishlistItem function here.
     // Clear the <input/> field on button press.

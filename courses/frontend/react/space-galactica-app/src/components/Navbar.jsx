@@ -31,7 +31,7 @@ export const Navbar = () => {
       <nav className={styles.navbar}>
         <div className={styles.navbarBG} />
         <ul className={styles.navbarList}>
-          {/* Task - Week 2 */}
+          {/* 🧑🏽‍🚀 Task - Week 2 */}
           {/* Create a <NavItem> component, which accepts the following props: title, link, isActive.  */}
           <li className={classNames(styles.navbarLinks, {
             [styles.isLinkActive]: navbarItems[0].link === currentPath,
@@ -48,7 +48,7 @@ export const Navbar = () => {
           })}>
             <Link to={navbarItems[2].link}><b>03</b> NASA COLLABORATION</Link>
           </li>
-          {/* Task - Week 3 */}
+          {/* 🧑🏽‍🚀 Task - Week 3 */}
           {/* Replace repeating content by using .map() and the NavLink component from react-router. */}
         </ul>
       </nav>

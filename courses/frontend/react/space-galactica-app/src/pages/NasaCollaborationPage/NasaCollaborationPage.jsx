@@ -22,7 +22,7 @@ export const NasaCollaboration = () => {
 
     fetchRoverPhotos();
 
-    // Task - Week 3 
+    // 🧑🏽‍🚀 Task - Week 3 
     // Fetch the extra data for NASA_URLs.astronomyPicOfTheDay and save it to the dailyImg state variable.
   }, []);
 
@@ -32,18 +32,18 @@ export const NasaCollaboration = () => {
         <h1>Collaboration with NASA</h1>
         <section className="card">
           <h2>Astronomy Picture of the day</h2>
-          {/* Task - Week 3 */}
+          {/* 🧑🏽‍🚀 Task - Week 3 */}
           {/* After fetching data from the NASA_URLs.astronomyPicOfTheDay url, display the returned data here. */}
           {/* You should display the title, explanation, and the image using the url from the response */}
         </section>
         <section className="card">
           <h2>Rover Photos</h2>
-          {/* Task - Week 3 */}
+          {/* 🧑🏽‍🚀 Task - Week 3 */}
           {/* Iterate over the roverPhoto?.photos array and display all the pictures. */}
           {
             roverPhoto?.photos?.length ? (
               <>
-                {/* Task - Week 3 */}
+                {/* 🧑🏽‍🚀 Task - Week 3 */}
                 {/* Create a react component for the <RoverPhoto />, which should accept the following props: */}
                 {/* 1. src: source of the img; */}
                 {/* 2. date: earth_date data coming from the API; */}

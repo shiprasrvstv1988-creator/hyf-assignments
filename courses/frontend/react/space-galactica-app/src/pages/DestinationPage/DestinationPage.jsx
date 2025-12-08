@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './DestinationPage.module.css';
 
-// Task - Week 2
+// 🧑🏽‍🚀 Task - Week 2
 // Move this to its own file in this folder.
 const PlanetWishlistItem = ({
   name,
@@ -25,7 +25,7 @@ export const Destinations = () => {
   let numberOfPlanets = 0;
 
   const onAddOrRemovePlanet = (name, index) => {
-    // Task - Week 2
+    // 🧑🏽‍🚀 Task - Week 2
     // Implement this function.
     // If you press the "ADD PLANET", the selected planet should display "SELECTED".
     // When a planet is selected or deselected, the numberOfPlanets counter should update.
@@ -38,16 +38,16 @@ export const Destinations = () => {
         <h1>Travel destinations</h1>
         <section className="card">
           <h2>Wishlist</h2>
-          {/* Task - Week 2 */}
+          {/* 🧑🏽‍🚀 Task - Week 2 */}
           {/* Display the number of selected planets. */}
           {/* Display the "no planets" message if the wishlist is empty. */}
           <p>No planets in wishlist :(</p>
           <p>You have {numberOfPlanets} in your wishlist</p>
           <b>List coming soon after lesson 3!</b>
           
-          {/* Task - Week 3 */}
+          {/* 🧑🏽‍🚀 Task - Week 3 */}
           {/* Use the AddWishlistItem component here. */}
-          {/* Task - Week 3 */}
+          {/* 🧑🏽‍🚀 Task - Week 3 */}
           {/* Convert the list, so it is using .map() to display the items with the PlanetWishlistItem component. */}
           {/* Implement the "REMOVE" function */}
           {/* Uncomment the following code snippet: */}
@@ -68,7 +68,7 @@ export const Destinations = () => {
         </section>
         <section className="card">
           <h2>Possible destinations</h2>
-          {/* Task - Week 2 */}
+          {/* 🧑🏽‍🚀 Task - Week 2 */}
           {/* Add all 4 planets: Europa, Moon, Mars, Titan.  */}
           {/* Use the README.md file for descriptions. */}
           {/* Create a <PlanetCard /> component, which accepts the following props: name, description, thumbnail, isSelected, onAddOrRemovePlanet */}

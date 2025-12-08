@@ -1,11 +1,11 @@
 import styles from './AboutUsPage.module.css';
 
-// Task - Week 1
+// 🧑🏽‍🚀 Task - Week 1
 // After you are finished with creating the page, move the OurValues, OurCrew, OurPartners components into their own files in this folder.
 // Import and use the components from the newly created files.
 
 const OurValues = () => {
-  // Task - Week 1
+  // 🧑🏽‍🚀 Task - Week 1
   // Create the "Our Values" section.
   // Use the descriptions provided in /src/pages/AboutUsPage/README.md.
   // Some inspiration ideas can be found in /data/inspiration_about_us.
@@ -15,7 +15,7 @@ const OurValues = () => {
 };
 
 const OurCrew = () => {
-  // Task - Week 1
+  // 🧑🏽‍🚀 Task - Week 1
   // Create the "Our Crew section".
   // Use the descriptions provided in /src/pages/AboutUsPage/README.md.
   // Use the pictures from /public/crew.
@@ -26,7 +26,7 @@ const OurCrew = () => {
 }
 
 const OurPartners = () => {
-  // Task - Week 1
+  // 🧑🏽‍🚀 Task - Week 1
   // Create the "Our Partners section".
   // Use the descriptions provided in /src/pages/AboutUsPage/README.md.
   // Use the pictures from /public/business_partners.
@@ -51,7 +51,7 @@ export const Crew = () => {
           <OurCrew/>
         </section>
 
-         {/* Task - Week 1 */}
+         {/* 🧑🏽‍🚀 Task - Week 1 */}
          {/* Use the "OurPartners" component here. */}
       </main>
     </div>
