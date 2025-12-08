@@ -2,7 +2,8 @@
   inset-inline-start: 0;
   inset-inline-end: 0;
   inset-block-end: 0;
-  background-color: #eee;
+  position: fixed;
+  background-color: #84848492;
   color: #000;
   padding: var(--spacing-20) var(--spacing-40);
   display: flex;

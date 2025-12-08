@@ -6,15 +6,15 @@ export const AddWishlistItem = ({
 }) => {
   const [thumbnail, setThumbnail] = useState('/destination/image-europa.png');
   // Task - Week 3
-  // 1. Add a useState for the handling the <input id="customWishlist" type="text" />
-  // 2. Connect the setThumbnail to the <select>
+  // Add a useState for the handling of the <input id="customWishlist" type="text" />.
+  // Connect the setThumbnail to the <select>.
 
   const onAddItemPressed = () => {
     // Task - Week 3
-    // implement this function
-    // Clear the <input/> field on button press
-    // pass the thumbnail and the name from the input to the onAddWishlistItem function
-    // call the onAddWishlistItem here
+    // Implement this function.
+    // Call the onAddWishlistItem function here.
+    // Clear the <input/> field on button press.
+    // Pass the thumbnail and the name from the input to the onAddWishlistItem function.
   }
 
   return (
@@ -29,7 +29,7 @@ export const AddWishlistItem = ({
         <option value="/destination/image-moon.png">MOON</option>
         <option value="/destination/image-titan.png">TITAN</option>
       </select>
-      <button>ADD CUSTOM</button>
+      <button onClick={onAddItemPressed}>ADD CUSTOM</button>
     </div>
   );
 };
