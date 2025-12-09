@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import { Planet } from '../icons/Planet';
+import { Badge } from './Badge';
 import styles from './Navbar.module.css';
 
 const navbarItems = [
@@ -50,7 +51,14 @@ export const Navbar = () => {
           </li>
           {/* 🧑🏽‍🚀 Task - Week 3 */}
           {/* Replace repeating content by using .map() and the NavItem component. */}
+          <li className={styles.wishlistBadge} aria-label="Wishlist">
+          </li>
         </ul>
+        {/* 🧑🏽‍🚀 Task - Week 4 - part 3 */}
+        {/* Take the count of the planet wishlist from the context and display it in the Badge. */}
+        <Badge count={0}>
+          <Planet color="white"  />
+        </Badge>
       </nav>
     </header>
   );
