@@ -11,10 +11,9 @@ export const AddWishlistItem = ({
 
   const onAddItemPressed = () => {
     // 🧑🏽‍🚀 Task - Week 3
-    // Implement this function.
-    // Call the onAddWishlistItem function here.
-    // Clear the <input/> field on button press.
-    // Pass the thumbnail and the name from the input to the onAddWishlistItem function.
+    // The required functionaity here:
+    // - call the onAddWishlistItem function;
+    // - clear the <input/> field .
   }
 
   return (
