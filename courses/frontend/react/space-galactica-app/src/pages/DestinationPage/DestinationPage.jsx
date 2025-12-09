@@ -14,9 +14,9 @@ const PlanetWishlistItem = ({ name, thumbnail, onRemove }) => {
 };
 
 export const Destinations = () => {
-  const [wishlistPlanets, setWishlistPlanets] = useState([]);
+  const [planetWishlist, setPlanetWishlist] = useState([]);
 
-  const isPlanetSelected = (planetName) => {
+  const isPlanetInWishlist = (planetName) => {
     // 🧑🏽‍🚀 Task - Week 2
     // This should be a simple function to check if a given planet is selected.
     // You will need to work with the array of selected planets.
@@ -74,13 +74,13 @@ export const Destinations = () => {
               alt=""
             />
             <div className={styles.planetDescription}>
-              <h2>EUROPA {isPlanetSelected("Europa") ? "- SELECTED" : ""}</h2>
+              <h2>EUROPA {isPlanetInWishlist("Europa") ? "- SELECTED" : ""}</h2>
               <p>Lorem ipsum...</p>
             </div>
             <button
               className="roundButton"
               onClick={() => togglePlanetSelection("Europa")}>
-              {isPlanetSelected("Europa")
+              {isPlanetInWishlist("Europa")
                 ? "REMOVE FROM WISHLIST"
                 : "ADD TO WISHLIST"}
             </button>
@@ -92,13 +92,13 @@ export const Destinations = () => {
               alt=""
             />
             <div className={styles.planetDescription}>
-              <h2>MARS {isPlanetSelected("Mars") ? "- SELECTED" : ""}</h2>
+              <h2>MARS {isPlanetInWishlist("Mars") ? "- SELECTED" : ""}</h2>
               <p>Lorem ipsum...</p>
             </div>
             <button
               className="roundButton"
               onClick={() => togglePlanetSelection("Mars")}>
-              {isPlanetSelected("Mars")
+              {isPlanetInWishlist("Mars")
                 ? "REMOVE FROM WISHLIST"
                 : "ADD TO WISHLIST"}
             </button>
@@ -110,3 +110,9 @@ export const Destinations = () => {
 };
 
 export default Destinations;
+
+
+// 🧑🏽‍🚀 Task - Week 4 - part 2
+// Hate to break it to you, but you will have to make some changes to the code you already wrote.
+// Now that you have context, grab and use the context data in this.
+// You will need to replace some ofthe variables and functions with the ones from the context.
