@@ -118,6 +118,7 @@ button {
   padding: var(--spacing-08);
   border: none;
   background-color: white;
+  color: black;
   font-weight: 600;
   letter-spacing: 2px;
 }
@@ -173,18 +174,25 @@ button {
 }
 
 .roundButton {
-  padding: unset;
+  padding: var(--spacing-08);
   height: 100px;
   width: 100px;
   min-height: 100px;
   min-width: 100px;
-  line-height: 100px;
+  line-height: 1.2;
   cursor: pointer;
   background-color: white;
+  color: black;
   border-radius: 50%;
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: 3px;
+  font-size: var(--font-size-3xs);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .fullBGpicture {
