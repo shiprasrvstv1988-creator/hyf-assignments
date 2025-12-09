@@ -50,12 +50,12 @@ export const Navbar = () => {
             <Link to={navbarItems[2].link}><b>03</b> NASA COLLABORATION</Link>
           </li>
           {/* 🧑🏽‍🚀 Task - Week 3 */}
-          {/* Replace repeating content by using .map() and the NavItem component. */}
+          {/* Replace repeating content by using .map() and the previously created NavItem component. */}
           <li className={styles.wishlistBadge} aria-label="Wishlist">
           </li>
         </ul>
         {/* 🧑🏽‍🚀 Task - Week 4 - part 3 */}
-        {/* Take the count of the planet wishlist from the context and display it in the Badge. */}
+        {/* Take the count of the planets wishlist from the context and display it in the Badge. */}
         <Badge count={0}>
           <Planet color="white"  />
         </Badge>

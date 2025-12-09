@@ -14,7 +14,7 @@ import "./main.css";
 // There is a /src/contexts folder- you will have to create a new file there.
 // You will have to import and use the context provider here, so that all routes can access the context.
 // The context should have the following properties:
-// - planetWishlist: an array of objects, each with a name and a thumbnail property.
+// - planetsWishlist: an array of objects, each with a name and a thumbnail property.
 // - addPlanetToWishlist: a function that adds an item to the wishlist.
 // - removePlanetFromWishlist: a function that removes an item from the wishlist.
 // - isPlanetInWishlist: a function that checks if an item is in the wishlist.

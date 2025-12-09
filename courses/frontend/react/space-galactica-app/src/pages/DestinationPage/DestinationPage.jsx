@@ -3,7 +3,7 @@ import styles from "./DestinationPage.module.css";
 
 // 🧑🏽‍🚀 Task - Week 2
 // Move this to its own file in this folder.
-const PlanetWishlistItem = ({ name, thumbnail, onRemove }) => {
+const PlanetsWishlistItem = ({ name, thumbnail, onRemove }) => {
   return (
     <div className={styles.wishlistItem}>
       <img className={styles.wishlistItemThumbnail} src={thumbnail} alt="" />
@@ -14,27 +14,27 @@ const PlanetWishlistItem = ({ name, thumbnail, onRemove }) => {
 };
 
 export const Destinations = () => {
-  const [planetWishlist, setPlanetWishlist] = useState([]);
+  const [planetsWishlist, setPlanetsWishlist] = useState([]);
 
   const isPlanetInWishlist = (planetName) => {
     // 🧑🏽‍🚀 Task - Week 2
     // This should be a simple function to check if a given planet is selected.
-    // You will need to work with the array of selected planets.
+    // You will need to work with the array of planets wishlist.
   };
 
   const togglePlanetSelection = (name, thumbnail) => {
     // 🧑🏽‍🚀 Task - Week 2
-    // When a planet is selected or deselected, the state of selected planets should be updated accordingly by 
+    // When a planet is selected or deselected (toggled), the state of the wishlist planets should be updated accordingly by 
     // calling the addPlanetToWishlist or removePlanetFromWishlist function. You will need a condition here.
   };
 
   const addPlanetToWishlist = (name, thumbnail) => {
     // 🧑🏽‍🚀 Task - Week 2
-    // Add the planet to the wishlist planets state.
+    // Add the planet to the planets wishlist state.
   };
   const removePlanetFromWishlist = (name) => {
     // 🧑🏽‍🚀 Task - Week 2
-    // Remove the planet from the wishlist planets state.
+    // Remove the planet from the planets wishlist state.
   };
 
   return (
@@ -57,7 +57,7 @@ export const Destinations = () => {
           <h3>Your current wishlist</h3>
           <div className={styles.wishlistList}>
             ...
-            Use .map() to display the wishlist planets with the PlanetWishlistItem component. 
+            Use .map() to display the wishlist planets with the PlanetsWishlistItem component. 
           </div> 
           */}
         </section>
