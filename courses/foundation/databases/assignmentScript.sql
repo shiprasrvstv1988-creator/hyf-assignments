@@ -38,13 +38,13 @@ JOIN status on task.status_id=status.id;
 
 --Get the name of each status, along with a count of how many tasks have that status.
 SELECT status.name, COUNT(task.status_id) FROM task 
-JOIN status ON task.status_id=status.id
+LEFT JOIN status ON task.status_id=status.id
 GROUP BY status.name;
 
 
 --Get the names of all statuses, sorted by the status with most tasks first.
 SELECT status.name, COUNT(task.status_id) FROM task 
-JOIN status ON task.status_id=status.id
+LEFT JOIN status ON task.status_id=status.id
 GROUP BY status.name
 ORDER BY COUNT(task.status_id) DESC;
 
