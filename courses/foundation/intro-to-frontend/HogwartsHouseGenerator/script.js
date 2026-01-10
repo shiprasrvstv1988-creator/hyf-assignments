@@ -14,7 +14,7 @@ const output = document.querySelector(".output");
 
 //Choosing a house
 
-function getRandomHouse(inputName) {
+function getRandomHouse() {
   const randomIndex = Math.floor(Math.random() * hogwartsHouse.length);
   return hogwartsHouse[randomIndex];
 }
@@ -23,7 +23,7 @@ generateBtn.addEventListener("click", function () {
   const inputName = document.getElementById("name").value;
   //console.log(inputName)
 
-  if (inputName === "") {
+  if (!inputName) {
     output.textContent = "Please enter your name";
     output.style.color = "red";
     return;

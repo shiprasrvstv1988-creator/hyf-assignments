@@ -8,7 +8,9 @@ const products = getAvailableProducts();
 function renderProducts(products) {
   const productList = document.querySelector(".productList");
 
-  for (let i = 0; i < products.length; i++) {
+  const productsLength = products.length;
+
+  for (let i = 0; i < productsLength; i++) {
     const product = products[i];
 
     const li = document.createElement("li");
