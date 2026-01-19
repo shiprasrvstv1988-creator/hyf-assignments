@@ -26,9 +26,14 @@ If this is your first time using this repo, follow these steps:
     ![Clone](./assets/clone.png)
 
 ### Updating with the latest changes
-Sometimes we make changes to the assignments. If you have already forked this repo, you won't get these changes automatically. If you find that something is missing, or out of date, you can use the "Sync fork" feature on GitHub to pull in the latest changes to your own assignment repo.
+Sometimes we make changes to the assignment templates, which you will need to get a hold of. If you have already forked this repo, you won't get these changes automatically. You will need to copy the changes from the HackYourFuture repo to your own. Luckily, the "Sync fork" feature on GitHub makes it easy!
 
 ![Sync Fork](./assets/sync-fork.png)
+
+1. Click "Sync fork" at the top of your repo
+1. Click "Update branch"
+1. If there are any conflicts, GitHub will prompt you to create a PR and resolve them. For any assignments you've already completed, you should keep your own changes. For any assignments that you haven't done yet (or don't recognise), you should keep the changes from the parent.
+1. Congrats! It's now up to date. You can confirm this by checking next to the "Sync fork" button which should now read something like "This branch is up to date with...".
 
 ### Completing the assignments
 > [!TIP]
