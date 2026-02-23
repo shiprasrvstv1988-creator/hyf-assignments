@@ -1,5 +1,7 @@
 Potato
 Carrot
-Corn
+Mushroom
 Spinach
 Cucumber
+Tomato
+Beetroot
