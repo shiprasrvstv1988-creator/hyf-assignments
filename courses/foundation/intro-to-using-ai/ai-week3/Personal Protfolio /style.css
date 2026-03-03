@@ -64,8 +64,8 @@ nav a:hover {
   gap: 50px;
   flex-wrap: wrap;
 }
-.core-skills,
-.technical-skills {
+.core,
+.technical {
   flex: 1;
   min-width: 250px;
   padding: 15px;
