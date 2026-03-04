@@ -77,50 +77,6 @@ Personal Portfolio/
 ├── background1.jpg
 └── -2.jpg
 
-# HTML Structure :
-
-html
-└── head
-└── body
-├── header
-│ └── nav
-├── main.grid-container
-│ ├── section.about-me
-│ ├── section.skills
-│ │ └── div.skills-row
-│ │ ├── div.core
-│ │ └── div.technical
-│ ├── section.contact
-│ └── section.life-beyond-work
-├── div.button-container
-├── script
-└── footer
-
-# CSS Structure :
-
-style.css
-├── Global Styles
-├── Layout
-│ ├── Navigation (Flexbox)
-│ ├── Grid Container (CSS Grid)
-│ └── Section Containers (Cards)
-├── Components
-│ ├── Skills Row (Flexbox)
-│ ├── Button
-│ └── Footer
-└── Responsive Design
-├── Tablet Breakpoint
-└── Mobile Breakpoint
-
-# JS Structure :
-
-script.js
-├── Get button element
-├── Track background state (isOriginal)
-└── Click event handler
-├── Change background image
-└── Toggle state
-
 # 3 new things I learned from the review and implementation process.
 
 # Security Best Practices
