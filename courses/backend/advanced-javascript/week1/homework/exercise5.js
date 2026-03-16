@@ -1,0 +1,15 @@
+import { teas } from "../data/teas.js";
+
+//Create a search function for the tea shop
+
+function searchTeas(teas, query) {
+  return teas
+    .filter((tea) => tea.name.toLowerCase().includes(query.toLowerCase()))
+    .map((tea) => tea.name)
+    .sort();
+}
+console.log(searchTeas(teas, "earl"));
+
+console.log(searchTeas(teas, "dragon"));
+
+console.log(searchTeas(teas, "ch"));
