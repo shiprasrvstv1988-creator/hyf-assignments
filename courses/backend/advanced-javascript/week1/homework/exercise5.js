@@ -8,8 +8,8 @@ function searchTeas(teas, query) {
     .map((tea) => tea.name)
     .sort();
 }
-// console.log(searchTeas(teas, "earl"));
+console.log(searchTeas(teas, "earl"));
 
-// console.log(searchTeas(teas, "dragon"));
+console.log(searchTeas(teas, "dragon"));
 
-//console.log(searchTeas(teas, "ch"));
+console.log(searchTeas(teas, "ch"));

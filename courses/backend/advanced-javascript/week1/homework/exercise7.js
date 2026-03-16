@@ -10,4 +10,4 @@ const countByType = teas.reduce((counts, tea) => {
   return counts;
 }, {});
 
-//console.log(countByType);
+console.log(countByType);

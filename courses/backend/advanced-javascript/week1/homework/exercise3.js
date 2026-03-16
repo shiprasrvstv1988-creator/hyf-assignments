@@ -12,4 +12,4 @@ function lowStockAlert(teas) {
     .sort((a, b) => a.stockCount - b.stockCount);
 }
 
-//console.log(lowStockAlert(teas));
+console.log(lowStockAlert(teas));

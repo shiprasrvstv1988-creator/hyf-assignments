@@ -27,4 +27,4 @@ function inventoryReport(teas) {
     averagePrice: teasAvgPricePerGram,
   };
 }
-//console.log(inventoryReport(teas));
+console.log(inventoryReport(teas));
