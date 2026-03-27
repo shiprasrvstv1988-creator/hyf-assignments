@@ -43,7 +43,7 @@ async function createOrder(items) {
     body: JSON.stringify({ items }),
   });
 
-  if (!response.ok) throw new Error("Failed to create order: " + text);
+  if (!response.ok) throw new Error("Failed to create order: ");
 
   return response.json();
 }
