@@ -45,7 +45,7 @@ export class Order {
   }
 
   getSummary() {
-    const firstLine = `Order (${this.status}) - ${this.items.length}`;
+    const firstLine = `Order ${orderNumber} (${this.status}) - ${this.items.length}`;
     const secondLine = this.items
       .map((item) => `  ${item.describe()}`)
       .join("\n");
