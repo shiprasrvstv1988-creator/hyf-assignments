@@ -65,5 +65,5 @@ const order = new Order();
 order.addItem(new OrderItem(teaInstances[0], 200)); // Sencha
 order.addItem(new OrderItem(teaInstances[7], 50)); // Matcha
 
-console.log(order.getSummary());
+//console.log(order.getSummary());
 //console.log("Total:", order.getTotal().toFixed(2), "DKK");

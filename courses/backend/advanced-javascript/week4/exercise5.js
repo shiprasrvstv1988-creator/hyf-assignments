@@ -58,11 +58,16 @@ class TeaShop {
       return sum + customer.totalSpent();
     }, 0);
 
+    const lowStockItems = this.inventory.getLowStock(50).map((item) => ({
+      name: item.tea.name,
+      stockCount: item.stockCount,
+    }));
+
     return {
       totalCustomers: this.customers.length,
       totalOrders,
       totalRevenue: parseFloat(totalRevenue.toFixed(2)),
-      lowStockItems: this.inventory.getLowStock(50),
+      lowStockItems,
     };
   }
 }

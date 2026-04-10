@@ -46,5 +46,5 @@ const order2 = new Order();
 order2.addItem(new OrderItem(teaInstances[7], 50)); // Matcha
 customer.placeOrder(order2);
 
-console.log(customer.getOrderHistory());
+//console.log(customer.getOrderHistory());
 //console.log("Total spent:", customer.totalSpent().toFixed(2), "DKK");
