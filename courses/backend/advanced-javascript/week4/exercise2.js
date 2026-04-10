@@ -6,8 +6,8 @@ import { Tea } from "./exercise1.js";
 
 export class OrderItem {
   constructor(tea, grams) {
-    if (grams <= 0) {
-      throw new Error("Grams must be positive");
+    if (typeof grams !== "number" || grams <= 0) {
+      throw new Error("Grams must be positive number");
     } else {
       this.tea = tea;
       this.grams = grams;
@@ -45,13 +45,13 @@ export class Order {
   }
 
   getSummary() {
-    const firstLine = `Order (${this.status}) - ${this.items.length}`;
-    const secondLine = this.items
+    const orderHeader = `Order (${this.status}) - ${this.items.length}`;
+    const itemLines = this.items
       .map((item) => `  ${item.describe()}`)
       .join("\n");
-    const lastLine = `Total: ${this.getTotal().toFixed(2)} DKK`;
+    const totalLine = `Total: ${this.getTotal().toFixed(2)} DKK`;
 
-    return `${firstLine}\n${secondLine}\n${lastLine}`;
+    return `${orderHeader}\n${itemLines}\n${totalLine}`;
   }
 
   confirm() {
