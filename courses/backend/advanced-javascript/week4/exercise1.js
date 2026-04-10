@@ -1,12 +1,12 @@
 import { teas } from "../week1/data/teas.js";
 // Exercise 1: Tea Class with Validation
 
-const typeofTeas = ["green", "black", "herbal", "oolong", "white"];
+const TEA_TYPES = ["green", "black", "herbal", "oolong", "white"];
 export class Tea {
   constructor(name, type, origin, pricePerGram, organic) {
-    if (!name) {
-      throw new Error("Name is required");
-    } else if (!typeofTeas.includes(type)) {
+    if (typeof name !== "string" || name.trim() === "") {
+      throw new Error("Please provide a valid tea name");
+    } else if (!TEA_TYPES.includes(type)) {
       throw new Error(`Invalid type: ${type}`);
     } else if (pricePerGram < 0) {
       throw new Error("Price must be positive");
