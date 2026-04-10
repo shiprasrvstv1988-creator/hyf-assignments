@@ -13,11 +13,11 @@ export class Inventory {
   }
 
   sell(teaName, grams) {
-    const tName = this.stock[teaName];
-    if (tName.stockCount < grams) {
+    const stockItem = this.stock[teaName];
+    if (stockItem.stockCount < grams) {
       throw new Error("Not enough stock");
     }
-    tName.stockCount -= grams;
+    stockItem.stockCount -= grams;
   }
 
   restock(teaName, grams) {
@@ -26,8 +26,7 @@ export class Inventory {
   }
 
   getStock(teaName) {
-    const tName = this.stock[teaName];
-    return tName.stockCount;
+    return this.stock[teaName].stockCount;
   }
 
   getLowStock(threshold) {
