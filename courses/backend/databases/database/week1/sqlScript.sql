@@ -11,8 +11,8 @@ CREATE TABLE task (
   description TEXT,
   created DATETIME NOT NULL,
   updated DATETIME NOT NULL,
-  due_date DATETIME,
-  status TEXT NOT NULL
+  due_date DATETIME,  
+  STATUS NOT NULL
 );
 
 CREATE TABLE status (
@@ -20,7 +20,18 @@ CREATE TABLE status (
   name TEXT NOT NULL UNIQUE
 );
 
+CREATE TABLE user_task (
+  user_id INTEGER NOT NULL,
+  task_id INTEGER NOT NULL, 
+  PRIMARY KEY (user_id, task_id),
+  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE, 
+  FOREIGN KEY (task_id) REFERENCES task(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO user_task (user_id, task_id) VALUES (1, 1);
+
 INSERT INTO status (name) VALUES ('Not started'), ('In progress'), ('Done');
+
 
 INSERT INTO user (name, email, phone) VALUES ('John Doe', '', '+4512345678'), ('Jane Smith', 'jane@gmail.com', '+4512345679');
 
@@ -30,6 +41,13 @@ INSERT INTO task (title, description, created, updated, due_date, status) VALUES
   ('Write Unit Tests', 'Add test coverage for user authentication', datetime('now'), datetime('now'), '2025-08-05', 'Not started'),
   ('Deploy Application', 'Set up production environment', datetime('now'), datetime('now'), '2025-08-20', 'Not started');
 
+ALTER TABLE task ADD COLUMN status_id INTEGER REFERENCES status(id) DEFAULT 1;
+
+UPDATE task SET status_id = 1 WHERE status = 'Not started';
+UPDATE task SET status_id = 2 WHERE status = 'In progress';
+UPDATE task SET status_id = 3 WHERE status = 'Done';
+
+ALTER TABLE task DROP COLUMN status;
 
 -- Users
 INSERT INTO user (name, email, phone) VALUES ('Aarika Ellingworth', 'aellingworth0@harvard.edu', '483-396-8795');
