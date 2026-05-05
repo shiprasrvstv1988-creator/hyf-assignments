@@ -117,16 +117,29 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// intentionally unsafe GET/api/snippets
+// PART A & B GET/api/snippets
 router.get("/", async (req, res) => {
   let query = db.select("*").from("snippets");
 
+  const allowedColumns = ["created_at", "title"];
+
   if ("sort" in req.query) {
-    const orderBy = req.query.sort.toString();
-    if (orderBy.length > 0) {
-      query = query.orderByRaw(orderBy); // Vulnerable!
+    const sortParam = req.query.sort.toString().trim();
+
+    if (sortParam.length > 0) {
+      const parts = sortParam.split(" ");
+      const column = parts[0];
+      const direction = (parts[1] || "asc").toLowerCase();
+
+      const validColumn = allowedColumns.includes(column);
+      const validDirection = direction === "asc" || direction === "desc";
+
+      if (validColumn && validDirection) {
+        query = query.orderBy(column, direction);
+      }
     }
   }
+
   console.log("SQL", query.toSQL().sql);
 
   try {
