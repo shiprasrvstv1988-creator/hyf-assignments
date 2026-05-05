@@ -3,6 +3,21 @@ import db from "../../../db.js";
 
 const router = express.Router();
 
+// PART B Public Feed endpoint
+router.get("/public", async (req, res) => {
+  try {
+    const data = await db.select("*").from("snippets").where("is_private", 0);
+
+    res.status(200).json({
+      message: "Public feed fetched successfully",
+      data,
+    });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 //GET /api/snippets/:id
 router.get("/:id", async (req, res) => {
   try {
@@ -117,7 +132,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// PART A & B GET/api/snippets
+// PART A (1 & 2) GET/api/snippets
 router.get("/", async (req, res) => {
   let query = db.select("*").from("snippets");
 
