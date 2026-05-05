@@ -9,19 +9,28 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   const { q } = req.query;
 
+  // Validation: Ensure query is present and not just whitespace
+  if (!q || q.trim().length === 0) {
+    return res.status(400).json({
+      error: "Search query 'q' is required and cannot be empty.",
+    });
+  }
+
   try {
-    let query = db("snippets").select("*");
+    const results = await db("snippets")
+      .select("*")
+      .where("title", "like", `%${q}%`)
+      .orWhere("contents", "like", `%${q}%`);
 
-    if (q) {
-      query = query
-        .where("title", "like", `%${q}%`)
-        .orWhere("contents", "like", `%${q}%`);
-    }
-
-    const results = await query;
-    res.json(results);
+    res.status(200).json({
+      message: `Search results for "${q}"`,
+      data: results,
+    });
   } catch (error) {
-    res.status(500).json({ error: "Server error" });
+    console.error(error);
+    res
+      .status(500)
+      .json({ error: "An internal server error occurred during search." });
   }
 });
 
@@ -55,6 +64,7 @@ router.post("/", async (req, res) => {
 
     res.json(results);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Server error" });
   }
 });

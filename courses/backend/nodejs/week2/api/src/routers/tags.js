@@ -3,6 +3,9 @@ import db from "../../../db.js";
 
 const router = express.Router();
 
+//// validation to check for positive integers
+const isValidId = (id) => !isNaN(Number(id)) && Number(id) > 0;
+
 // GET /api/tags
 router.get("/", async (request, response) => {
   try {
@@ -17,13 +20,21 @@ router.get("/", async (request, response) => {
 //GET /api/tags/:id
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
+
+  if (!isValidId(id)) {
+    return res
+      .status(400)
+      .json({ error: "Invalid ID format. ID must be a positive number." });
+  }
+
   try {
     const tag = await db("tags").where({ id }).first();
     if (!tag) {
       return res.status(404).json({ error: "Tag not found" });
     }
-    res.json(tag);
+    res.status(200).json(tag);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Database error" });
   }
 });
@@ -52,6 +63,10 @@ router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
 
+  if (!isValidId(id)) {
+    return res.status(400).json({ error: "Invalid ID format." });
+  }
+
   if (!name) {
     return res.status(400).json({ error: "Tag name is required for update" });
   }
@@ -61,8 +76,9 @@ router.put("/:id", async (req, res) => {
     if (updatedRows === 0) {
       return res.status(404).json({ error: "Tag not found" });
     }
-    res.json({ message: "Tag updated successfully" });
+    res.status(200).json({ message: "Tag updated successfully" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Database error" });
   }
 });
@@ -70,12 +86,17 @@ router.put("/:id", async (req, res) => {
 //DELETE /api/tags/:id
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
+
+  if (!isValidId(id)) {
+    return res.status(400).json({ error: "Invalid ID format." });
+  }
+
   try {
     const deletedRows = await db("tags").where({ id }).del();
     if (deletedRows === 0) {
       return res.status(404).json({ error: "Tag not found" });
     }
-    res.json({ message: "Deleted tag" });
+    res.status(200).json({ message: "Deleted tag" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Database error while deleting tag" });

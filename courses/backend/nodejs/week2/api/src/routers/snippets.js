@@ -3,6 +3,9 @@ import db from "../../../db.js";
 
 const router = express.Router();
 
+// validation to check for positive integers
+const isValidId = (id) => !isNaN(Number(id)) && Number(id) > 0;
+
 // PART B Public Feed endpoint
 router.get("/public", async (req, res) => {
   try {
@@ -12,18 +15,27 @@ router.get("/public", async (req, res) => {
       message: "Public feed fetched successfully",
       data,
     });
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
 //GET /api/snippets/:id
 router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  // Validation: Path parameter must be a number
+  if (!isValidId(id)) {
+    return res
+      .status(400)
+      .json({ error: "Invalid ID format. ID must be a positive number." });
+  }
+
   try {
     const snippetId = await db("snippets")
       .join("users", "snippets.user_id", "=", "users.id")
-      .where({ "snippets.id": req.params.id })
+      .where({ "snippets.id": id })
       .select(
         "snippets.*",
         "users.id as userId",
@@ -49,7 +61,7 @@ router.get("/:id", async (req, res) => {
       },
     };
 
-    res.json(formattedSnippetId);
+    res.status(200).json(formattedSnippetId);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Database error" });
@@ -66,6 +78,10 @@ router.post("/", async (req, res) => {
     });
   }
 
+  if (!isValidId(user_id)) {
+    return res.status(400).json({ error: "user_id must be a valid number." });
+  }
+
   try {
     const [id] = await db("snippets").insert({
       user_id,
@@ -78,8 +94,8 @@ router.post("/", async (req, res) => {
       id,
       message: "Snippet created successfully",
     });
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Database error" });
   }
 });
@@ -88,6 +104,10 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { title, contents, is_private } = req.body;
+
+  if (!isValidId(id)) {
+    return res.status(400).json({ error: "Invalid ID format." });
+  }
 
   const updates = {};
   if (title !== undefined) updates.title = title;
@@ -107,9 +127,9 @@ router.put("/:id", async (req, res) => {
       return res.status(404).json({ error: "Snippet not found" });
     }
 
-    res.json({ message: "Snippet updated successfully" });
-  } catch (err) {
-    console.error(err);
+    res.status(200).json({ message: "Snippet updated successfully" });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Database error" });
   }
 });
@@ -118,6 +138,10 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
+  if (!isValidId(id)) {
+    return res.status(400).json({ error: "Invalid ID format." });
+  }
+
   try {
     const deletedRows = await db("snippets").where({ id }).del();
 
@@ -125,7 +149,7 @@ router.delete("/:id", async (req, res) => {
       return res.status(404).json({ error: "Snippet not found" });
     }
 
-    res.json({ message: "Deleted snippet" });
+    res.status(200).json({ message: "Deleted snippet" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Database error while deleting snippet" });
@@ -160,8 +184,8 @@ router.get("/", async (req, res) => {
   try {
     const data = await query;
     res.json({ message: "Hello from Week 2!", data });
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
