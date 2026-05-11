@@ -1,7 +1,62 @@
 import express from "express";
 import db from "../../../db.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const router = express.Router();
+
+//POST/api/users/register
+router.post("/register", async (req, res) => {
+  const { email, password, first_name, last_name } = req.body;
+
+  try {
+    const hash = await bcrypt.hash(password, 10);
+    await db("users").insert({
+      email,
+      password_hash: hash,
+      first_name,
+      last_name,
+    });
+    res.status(201).json({ message: "User created successfully!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Could not create user" });
+  }
+});
+
+//POST/api/users/login
+router.post("/login", async (req, res) => {
+  if (!req.body) {
+    return res.status(400).json({ error: "Request body is missing" });
+  }
+  const { email, password } = req.body;
+
+  try {
+    //Look up user by email
+    const user = await db("users").where({ email }).first();
+
+    //Check if user exists and compare password
+    if (!user || !(await bcrypt.compare(password, user.password_hash))) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+
+    //Issue JWT
+    const token = jwt.sign(
+      { userId: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    //Send response
+    res.status(200).json({
+      message: "Login successful",
+      token: token,
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 // validation to check for positive integers
 const isValidId = (id) => !isNaN(Number(id)) && Number(id) > 0;

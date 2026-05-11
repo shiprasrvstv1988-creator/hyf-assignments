@@ -1,4 +1,5 @@
 import express from "express";
+import { authenticateJWT } from "../middleware/auth.js";
 import db from "../../../db.js";
 
 const router = express.Router();
@@ -20,6 +21,8 @@ router.get("/public", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+router.use(authenticateJWT);
 
 //GET /api/snippets/:id
 router.get("/:id", async (req, res) => {
