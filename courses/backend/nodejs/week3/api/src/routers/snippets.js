@@ -138,7 +138,7 @@ router.put("/:id", authToken, async (req, res) => {
 });
 
 // DELETE /api/snippets/:id
-router.delete("/:id", authToken, async (req, res) => {
+router.delete("/:id", authToken, authorizeRole("admin"), async (req, res) => {
   const { id } = req.params;
 
   if (!isValidId(id)) {
