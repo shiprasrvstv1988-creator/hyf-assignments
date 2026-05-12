@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//login-token
+//POST/api/users/login-token
 router.post("/login-token", async (req, res) => {
   const { email, password } = req.body;
 
@@ -81,7 +81,7 @@ router.post("/login-token", async (req, res) => {
     });
 
     //Return to client
-    res.status(200).json({
+    return res.status(200).json({
       message: "Login successful (Database Token)",
       token: randomToken,
     });

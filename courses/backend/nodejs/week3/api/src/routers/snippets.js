@@ -1,5 +1,10 @@
 import express from "express";
-import { authenticateJWT, authToken } from "../middleware/auth.js";
+import {
+  authenticateJWT,
+  authToken,
+  authorizeRole,
+  requireApiKey,
+} from "../middleware/auth.js";
 import db from "../../../db.js";
 
 const router = express.Router();
@@ -22,7 +27,22 @@ router.get("/public", async (req, res) => {
   }
 });
 
-router.use(authenticateJWT);
+// GET /api/snippets/health
+// A machine-only endpoint to check system status
+router.get("/health", requireApiKey, async (req, res) => {
+  try {
+    // Optional: Check if DB is reachable
+    await db.raw("SELECT 1");
+
+    res.status(200).json({
+      status: "OK",
+      database: "connected",
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    res.status(500).json({ status: "error", database: "disconnected" });
+  }
+});
 
 //GET /api/snippets/:id
 router.get("/:id", authenticateJWT, async (req, res) => {
@@ -73,9 +93,11 @@ router.get("/:id", authenticateJWT, async (req, res) => {
 
 // POST /api/snippets
 router.post("/", authToken, async (req, res) => {
-  const { user_id, contents, title, is_private = 0 } = req.body;
+  const { contents, title, is_private = 0 } = req.body;
 
-  if (!title || !contents || !user_id) {
+  const user_id = req.user.id;
+
+  if (!title || !contents) {
     return res.status(400).json({
       error: "Missing required field",
     });

@@ -5,8 +5,6 @@ import tagsRouter from "./api/src/routers/tags.js";
 import searchRouter from "./api/src/routers/search.js";
 import usersRouter from "./api/src/routers/users.js";
 
-import db from "./db.js";
-
 const app = express();
 const port = process.env.PORT || 3000;
 

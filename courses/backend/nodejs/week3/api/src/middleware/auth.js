@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import db from "../../../db.js";
 
 export const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -45,7 +46,12 @@ export const authToken = async (req, res, next) => {
     const tokenRecord = await db("tokens")
       .join("users", "tokens.user_id", "=", "users.id")
       .where("tokens.token", token)
-      .select("users.*", "tokens.expires_at")
+      .select(
+        "users.id as userId",
+        "users.email",
+        "users.role",
+        "tokens.expires_at"
+      )
       .first();
 
     if (!tokenRecord) {
@@ -62,7 +68,7 @@ export const authToken = async (req, res, next) => {
 
     // Attach user to request
     req.user = {
-      id: tokenRecord.id,
+      id: tokenRecord.userId,
       email: tokenRecord.email,
       role: tokenRecord.role,
     };
@@ -84,4 +90,17 @@ export const authorizeRole = (requiredRole) => {
     }
     next();
   };
+};
+
+//requireApiKey Middleware
+export const requireApiKey = (req, res, next) => {
+  const incomingKey = req.headers["x-api-key"];
+
+  if (!incomingKey || incomingKey !== process.env.API_KEY) {
+    return res
+      .status(401)
+      .json({ error: "Unauthorized: Invalid or missing API Key" });
+  }
+
+  next();
 };
