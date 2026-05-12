@@ -17,3 +17,44 @@ export const authenticateJWT = (req, res, next) => {
     res.status(401).json({ error: "Unauthorized: No token provided" });
   }
 };
+
+//Implement authToken Middleware
+export const authToken = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ error: "No token provided" });
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    // Look up token in DB and join with user info
+    const tokenRecord = await db("tokens")
+      .join("users", "tokens.user_id", "=", "users.id")
+      .where("tokens.token", token)
+      .select("users.*", "tokens.expires_at")
+      .first();
+
+    if (!tokenRecord) {
+      return res.status(401).json({ error: "Invalid token" });
+    }
+
+    //Check expiration
+    if (
+      tokenRecord.expires_at &&
+      new Date(tokenRecord.expires_at) < new Date()
+    ) {
+      return res.status(401).json({ error: "Token expired" });
+    }
+
+    // Attach user to request
+    req.user = {
+      id: tokenRecord.id,
+      email: tokenRecord.email,
+    };
+
+    next();
+  } catch (error) {
+    res.status(500).json({ error: "Database error during auth" });
+  }
+};

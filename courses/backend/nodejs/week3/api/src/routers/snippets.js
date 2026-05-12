@@ -1,5 +1,5 @@
 import express from "express";
-import { authenticateJWT } from "../middleware/auth.js";
+import { authenticateJWT, authToken } from "../middleware/auth.js";
 import db from "../../../db.js";
 
 const router = express.Router();
@@ -25,7 +25,7 @@ router.get("/public", async (req, res) => {
 router.use(authenticateJWT);
 
 //GET /api/snippets/:id
-router.get("/:id", async (req, res) => {
+router.get("/:id", authenticateJWT, async (req, res) => {
   const { id } = req.params;
 
   // Validation: Path parameter must be a number
@@ -72,7 +72,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST /api/snippets
-router.post("/", async (req, res) => {
+router.post("/", authToken, async (req, res) => {
   const { user_id, contents, title, is_private = 0 } = req.body;
 
   if (!title || !contents || !user_id) {
@@ -104,7 +104,7 @@ router.post("/", async (req, res) => {
 });
 
 // PUT /api/snippets/:id
-router.put("/:id", async (req, res) => {
+router.put("/:id", authToken, async (req, res) => {
   const { id } = req.params;
   const { title, contents, is_private } = req.body;
 
@@ -138,7 +138,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE /api/snippets/:id
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authToken, async (req, res) => {
   const { id } = req.params;
 
   if (!isValidId(id)) {
@@ -160,7 +160,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 // PART A (1 & 2) GET/api/snippets
-router.get("/", async (req, res) => {
+router.get("/", authenticateJWT, async (req, res) => {
   let query = db.select("*").from("snippets");
 
   const allowedColumns = ["created_at", "title"];

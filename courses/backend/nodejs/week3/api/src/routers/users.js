@@ -2,6 +2,7 @@ import express from "express";
 import db from "../../../db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
 
 const router = express.Router();
 
@@ -58,6 +59,38 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//login-token
+router.post("/login-token", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    //secure check
+    const user = await db("users").where({ email }).first();
+    if (!user || !(await bcrypt.compare(password, user.password_hash))) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+
+    //Generate a random token
+    const randomToken = crypto.randomBytes(32).toString("hex");
+
+    //Store in the tokens table
+    await db("tokens").insert({
+      user_id: user.id,
+      token: randomToken,
+      expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+    });
+
+    //Return to client
+    res.status(200).json({
+      message: "Login successful (Database Token)",
+      token: randomToken,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 // validation to check for positive integers
 const isValidId = (id) => !isNaN(Number(id)) && Number(id) > 0;
 
@@ -105,6 +138,31 @@ router.get("/:id/snippets", async (req, res) => {
       message: `Snippets for user ${id} fetched successfully`,
       data: userSnippets,
     });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.post("/logout-token", async (req, res) => {
+  const authHeader = req.headers.authorization;
+
+  // If no header is present, they aren't 'logged in' anyway
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(204).end();
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    // This satisfies: "Deletes or invalidates the token record"
+    const deletedCount = await db("tokens").where({ token }).del();
+
+    if (deletedCount === 0) {
+      return res.status(404).json({ error: "Token not found" });
+    }
+
+    res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
